@@ -1,13 +1,27 @@
 {% extends 'base.html' %}
 
 {% block head %}
+<script type=text/javascript>
+    $(function() {
+      $('a').bind('click', function(event) {
+        $.getJSON('/_JSONPATH', {
+           json_path: event.target.id,
+           API_URL: $('p[id="API_URL_REF"]').text()
+        }, function(data) {
+          $("#result").html(data.result);
+        });
+        return false;
+      });
+    });
+</script>
 <h1>JSON HELPER</h1>
 {% endblock %}
 {% block body %}
 <form action =  "/" method = "POST">
     <input type="text" name="API_URL" id="API_URL">
     <input type="submit" value="Get JSON">
-    <p>{{ python_code | safe  }}</p>
+    <p id = result></p>
+    <p id = API_URL_REF>{{API_URL}}</p>
     <p>{{ json_output | safe  }}</p>
 </form>
 {% endblock %}

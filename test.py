@@ -9,7 +9,7 @@ def clean_output(response_data, n = 4, python_trace = ""):
         for key in response_data:
             python_trace = python_trace + "key:" +  key + ";" 
             cleaned_output = cleaned_output + "<br>" + indents + key + ": " + clean_output(response_data[key], n *2, python_trace)
-            python_trace = ""
+            python_trace = ";".join(python_trace[:-1].split(";").pop())
         cleaned_output = cleaned_output[:-1] + "<br>" + indents[:int(len(indents)/2)] + "},"
     elif type(response_data) == list:
         cleaned_output = cleaned_output + "["
