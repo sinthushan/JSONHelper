@@ -9,19 +9,31 @@
            API_URL: $('p[id="API_URL_REF"]').text()
         }, function(data) {
           $("#result").html(data.result);
+          window.scrollTo(0, 0);
         });
         return false;
       });
     });
 </script>
-<h1>JSON HELPER</h1>
+
 {% endblock %}
 {% block body %}
-<form action =  "/" method = "POST">
-    <input type="text" name="API_URL" id="API_URL">
-    <input type="submit" value="Get JSON">
-    <p id = result></p>
-    <p id = API_URL_REF>{{API_URL}}</p>
-    <p>{{ json_output | safe  }}</p>
-</form>
+<div class="container" >
+    <h1>JSON HELPER</h1>
+    <form action =  "/" method = "POST">
+        <input type="text" name="API_URL" id="API_URL">
+        <input type="submit" value="Get JSON">
+        <div class="border" id = python_code>
+            <p class="text-monospace" id = result></p>
+        </div>
+        <div class="border" id=url>
+            <p>URL:</p>
+            <p id = API_URL_REF>{{API_URL}}</p>
+        </div>
+        <div class="border" id = json>
+            <p>JSON:</p>
+            <p >{{ json_output | safe  }}</p>
+        </div>
+    </form>
+</div>
 {% endblock %}

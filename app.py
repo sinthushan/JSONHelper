@@ -1,15 +1,19 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, redirect, url_for
+
 import requests
 import json
+
 app = Flask(__name__)
+
 
 @app.route('/', methods=['Post', 'Get'])
 def index(json_path = ""):
-    if request.method == 'POST':
+    if request.method == 'POST' and request.form :
         API_URL = request.form['API_URL']
         response_data = requests.get(API_URL).json()
+        json_output = clean_output(response_data)[:-1]
         return render_template('index.html', API_URL = API_URL,json_output =  clean_output(response_data)[:-1] )
-    return render_template('index.html', API_URL = "",json_output =  "")
+    return render_template('index.html', API_URL = "",json_output= "" )
 
 def clean_output(response_data, n = 4, python_trace = ""):
     indents = '&nbsp' * n
@@ -41,7 +45,7 @@ def get_python_code():
     json_path = request.args.get('json_path', 0, type=str)
     API_URL = request.args.get('API_URL', 0, type=str)
     JSON_path_lst = json_path.split(';')
-    python_code = f"API_URL = '{API_URL}' <br> response_data = requests.get(API_URL).json() <br> response_data"
+    python_code = f"<p>Python Code:</p> import requests <br> import json <br> API_URL = '{API_URL}' <br> response_data = requests.get(API_URL).json() <br> response_data"
     for key_index in JSON_path_lst:
         index = key_index.split(":")[1]
         if index.isnumeric():
