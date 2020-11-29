@@ -7,6 +7,7 @@
 <form action =  "/" method = "POST">
     <input type="text" name="API_URL" id="API_URL">
     <input type="submit" value="Get JSON">
-    <p>{{ task | safe  }}</p>
+    <p>{{ python_code | safe  }}</p>
+    <p>{{ json_output | safe  }}</p>
 </form>
 {% endblock %}
