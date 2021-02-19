@@ -10,8 +10,8 @@ clicked and the user will recieve Python code that can be used to reach that nod
 
 Requirements:
 
-*Flask
+* Flask
 
-*Requests
+* Requests
 
-*JSON
+* JSON
